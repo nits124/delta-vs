@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    .container {
+      border: 2px solid black;
+      width: 222px;
+      height: 222px;
+      padding: 33px
+    }
+
+    .child1 {
+      border: 2px solid black;
+      width: 122px;
+      height: 122px;
+      padding: 33px;
+    }
+
+    .child2 {
+      border: 2px solid black;
+      width: 72px;
+      height: 72px;
+    }
+  </style>
+  <!-- <script src="2.time js.js"></script> -->
+</head>
+
+<body>
+  <div class="container">container
+    <div class="child1">child1
+      <div class="child2">child2</div>
+    </div>
+  </div>
+
+  <script>
+    // stop propagation --- handle an event in a specific element without triggering event handlers on parent elements.
+    document.querySelector('.child2').addEventListener('click', function (e) {
+      e.stopPropagation(); // Prevents the event from bubbling up to the parent
+      alert('child2 was clicked');
+    });
+    document.querySelector('.child1').addEventListener('click', function (e) {
+      e.stopPropagation();
+      alert('child1 was clicked');
+    });
+    document.querySelector('.container').addEventListener('click', function () {
+      alert('container was clicked');
+    });
+
+    // event.stopImmediatePropagation() stops the event from propagating and also prevents other event listeners on the same element from running.
+    //     document.getElementById("child").addEventListener("click", function(event) {
+    //     alert("First listener");
+    //     event.stopImmediatePropagation(); // Prevents other listeners on the same element
+    // });
+
+    // document.getElementById("child").addEventListener("click", function() {
+    //     alert("Second listener"); // This won't execute
+    // });
+
+  </script>
+
+</body>
+
+</html>

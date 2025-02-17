@@ -1,0 +1,11 @@
+.chat{
+    background-color: aqua;
+    /* padding: 22px; */
+    /* border-radius: 11px; */
+}
+body{
+    margin: 20px;
+}
+.mssg{
+    background-color: rgb(206, 206, 104);
+}

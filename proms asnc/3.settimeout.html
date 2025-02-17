@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+      #box {
+            width: 200px;
+            height: 200px;
+            background-color: blue;
+            text-align: center;
+            line-height: 200px;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+        }
+</style>
+</head>
+<body>
+  <div id="box">Hello</div>
+
+<script>
+
+  //setTimeout is a function that executes a given piece of code or function after a specified delay (in milliseconds).
+  //setTimeout(function, delay, param1, param2, ...);
+  console.log("Start");
+
+setTimeout(() => {
+    console.log("Executed after 2 seconds");
+}, 2000);
+
+console.log("End");
+// Start
+// End
+// Executed after 2 seconds
+//-------------------------------------------
+function greet(name) {
+    console.log("Hello, " + name);
+}
+setTimeout(greet, 3000, "Alice"); // Calls greet("Alice") after 3 seconds
+
+//-------------------------------------------
+// If a callback function is provided, it is executed after the color change.
+// The function is called in a nested manner to create a sequence of color changes.
+// This is an example of callback-based asynchronous execution.
+
+function changeColor(element, color, callback) {
+            setTimeout(() => {
+                element.style.backgroundColor = color;
+                if (callback) callback();
+            }, 2000); // Change color after 2 seconds
+        }
+
+        const box = document.getElementById('box');
+        
+        changeColor(box, 'red', () => {
+            changeColor(box, 'green', () => {
+                changeColor(box, 'yellow', () => {
+                    changeColor(box, 'purple');
+                });
+            });
+        });
+</script>
+  
+</body>
+</html>

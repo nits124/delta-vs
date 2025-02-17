@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+//The setInterval function repeatedly executes a specified function at fixed time intervals until it is stopped using clearInterval.
+//setInterval(function, delay, param1, param2, ...);
+
+// setInterval(() => {
+//     console.log("This message appears every 2 seconds");
+// }, 2000);
+
+// This message appears every 2 seconds
+// This message appears every 2 seconds
+// ...
+let count = 0;
+let intervalId = setInterval(() => {
+    count++;
+    console.log("Execution count:", count);
+
+    if (count === 5) {
+        clearInterval(intervalId); // Stop after 5 executions
+        console.log("Interval stopped");
+    }
+}, 1000);
+
+//-------------------------------------------
+// function greet(name) {
+//     console.log("Hello, " + name);
+// }
+
+// let intervalId = setInterval(greet, 2000, "Alice");
+
+// // Stop after 6 seconds
+// setTimeout(() => {
+//     clearInterval(intervalId);
+//     console.log("Stopped greeting");
+// }, 6000);
+
+// Hello, Alice
+// Hello, Alice
+// Hello, Alice
+// Stopped greeting
+
+
+
+
+
+  </script>
+  
+</body>
+</html>

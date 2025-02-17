@@ -1,0 +1,7 @@
+CREATE TABLE user (
+    id VARCHAR(44) PRIMARY KEY,
+    username VARCHAR(22) UNIQUE,
+    email VARCHAR(33) UNIQUE NOT NULL,
+    password VARCHAR(33) NOT NULL
+);
+-- SHOW TABLES;

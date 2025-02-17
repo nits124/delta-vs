@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+
+
+.btn{
+  @apply text-sm px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-500 active:bg-purple-900
+}
+/* this properties come first in priority before tailwind properties utilities  */
+@tailwind utilities;

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #box {
+        width: 200px;
+        height: 200px;
+        background-color: blue;
+        text-align: center;
+        line-height: 200px;
+        color: white;
+        font-size: 20px;
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+  <div id="box">Hello</div>
+
+  <script>
+      function changeColor(element, color) {
+          return new Promise((resolve) => {
+              setTimeout(() => {
+                  element.style.backgroundColor = color;
+                  resolve();
+              }, 2000); // Change color after 2 seconds
+          });
+      }
+
+      const box = document.getElementById('box');
+
+      // Using Promises to chain the color changes
+      changeColor(box, 'red')
+          .then(() => changeColor(box, 'green'))
+          .then(() => changeColor(box, 'yellow'))
+          .then(() => changeColor(box, 'purple'));
+          // The resolve() function is called after the color change, allowing us to chain .then() calls.
+          // This avoids callback nesting and makes the code more readable.
+  </script>
+
+</body>
+</html>

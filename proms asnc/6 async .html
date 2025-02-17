@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Change Color with Async/Await</title>
+  <style>
+    #box {
+      width: 200px;
+      height: 200px;
+      background-color: blue;
+      text-align: center;
+      line-height: 200px;
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    #box2 {
+      width: 200px;
+      height: 200px;
+      background-color: blue;
+      text-align: center;
+      line-height: 200px;
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="box">Hello</div>
+<br><br>
+  <div id="box2">Hello</div>
+
+
+  <script>
+    function changeColor(element, color) {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          element.style.backgroundColor = color;
+          resolve();
+        }, 2000); // Change color after 2 seconds
+      });
+    }
+
+    async function changeColorsSequentially() {
+      const box = document.getElementById('box');
+
+      await changeColor(box, 'red');
+      await changeColor(box, 'green');
+      await changeColor(box, 'yellow');
+      await changeColor(box, 'purple');
+    }
+    // If any changeColor function fails (e.g., due to an error), it will stop execution because await will not proceed if the Promise is not resolved. To handle this, we can use try...catch to prevent the entire sequence from breaking if one step fails.
+
+    changeColorsSequentially();
+
+    //-------------------------------------------
+
+    function changeColor2(element, color) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          if (Math.random() < 0.2) { // Simulating a random failure (20% chance)
+            reject(`Failed to change color to ${color}`);
+          } else {
+            element.style.backgroundColor = color;
+            resolve();
+          }
+        }, 2000);
+      });
+    }
+
+    async function changeColorsSequentially2() {
+      const box2 = document.getElementById('box2');
+
+      try {
+        await changeColor2(box2, 'red');
+      } catch (error) {
+        console.log(error);
+      }
+
+      try {
+        await changeColor2(box2, 'green');
+      } catch (error) {
+        console.log(error);
+      }
+
+      try {
+        await changeColor2(box2, 'yellow');
+      } catch (error) {
+        console.log(error);
+      }
+
+      try {
+        await changeColor2(box2, 'purple');
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    changeColorsSequentially2();
+
+    //-------------------------------------------
+//   inside loop-------------------------
+//     async function changeColorsSequentially() {
+//     const box = document.getElementById('box');
+//     const colors = ['red', 'green', 'yellow', 'purple'];
+
+//     for (const color of colors) {
+//         try {
+//             await changeColor(box, color);
+//         } catch (error) {
+//             console.error(error);
+//         }
+//     }
+// }
+
+  </script>
+
+</body>
+
+</html>
