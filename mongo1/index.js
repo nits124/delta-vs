@@ -1,26 +1,31 @@
-const mongoose = require("mongoose");
-main()
+const mongoose = require("mongoose");//used in a Node.js environment to import the Mongoose library into the current file
+
+async function main() {
+    await mongoose.connect("mongodb://127.0.0.1:27017/test");
+}
+main()//this likely refers to an asynchronous function called main , used to connect to MongoDB.
     .then(() => {
         console.log("connection succesfull");
     })
     .catch((err) => console.log(err));
-async function main() {
-    await mongoose.connect("mongodb://127.0.0.1:27017/test");
-}
-const userSchema = new mongoose.Schema({
+
+const userSchema = new mongoose.Schema({  // creates a new schema definition using Mongoose’s Schema constructor.specifying the structure and any validation rules.
     name: {
         type :String,
         maxLength:9, 
     },
-    email: String,
+    email: String,   //store a string, but no specific constraints like length or format are provided here (you might want to add validation for email format
     age: {
         type :Number,
         default:33,
-        min:[1,"age much greater than one"],
+        min:[1,"age must greater than one"],
     },
+    // defines a validation rule that the value of age must be greater than or equal to 1. If a value less than 1 is provided, the error message "age must greater than one" will be returned.
 });
 const User = mongoose.model("User", userSchema);
-
+//mongoose.model() is a Mongoose function that creates a model.It allows you to interact with the MongoDB database by creating, reading, updating, and deleting documents based on the schema definition.
+//first argument "User" is the name of the model.Mongoose will automatically convert this name to the name of the collection in MongoDB. "users" (in lowercase and plural form).
+//userSchema is the schema that defines the structure and validation rules for the documents in the "users" collection.
 const user2= new User({
     name: "e4dr7l",
     age: 0,
