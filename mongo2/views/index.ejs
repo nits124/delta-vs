@@ -22,14 +22,40 @@
                         <%= chat.mssg %>
                     </p><form method="get" action="/chats/<%= chat._id %>/edit"><button>Edit</button></form><br>
                     <form method="post" action="/chats/<%= chat._id %>?_method=delete"><button>Delete</button></form><br>
-                    <form method="get" action="/chats/<%= chat._id %>"><button>Show</button></form>
+                    <form method="get" action="/chats/<%= chat._id %>">
+                        <!-- Form submit hone par /chats/:id URL par jayega (yaha chat._id ek unique MongoDB ID hai) -->
+                        <!-- Form submit hone par /chats/:id URL par jayega (yaha chat._id ek unique MongoDB ID hai): -->
+                        <!-- <form method="get" action="/chats/65d7a9e5b3f4c2a8e9a12345"> -->
+
+                        <button>Show</button></form>
                 </div>
                 <p>Received by: <i>
                         <%= chat.to %>
                     </i></p>
                 <hr>
                 <p><%= chat.created_at.toString().split(" ")[4] %></p>
+                <!-- "Thu Feb 22 2024 15:30:45 GMT+0000 (Coordinated Universal Time)"
+                .split(" ") karenge, to array ban jayega:
+                [
+  "Thu",  // 0 - Day
+  "Feb",  // 1 - Month
+  "22",   // 2 - Date
+  "2024", // 3 - Year
+  "15:30:45", // 4 - Time (HH:MM:SS)
+  "GMT+0000", // 5 - Timezone
+  "(Coordinated", // 6 - Part of timezone
+  "Universal",  // 7 - Part of timezone
+  "Time)"  // 8 - Part of timezone
+]
+[4] se array ka 5th element liya → "15:30:45" -->
+
+<!-- Better Way? (.toLocaleTimeString())====  %= chat.created_at.toLocaleTimeString() %>===3:30:45 PM -->
+
                 <p><%= chat.created_at.toString().split(" ").slice(0,4 ).join('-') %></p>
+                <!-- .slice(0, 4)      	Sirf pehle 4 elements rakhe (Day, Month, Date, Year)	["Thu", "Feb", "22", "2024"]
+                     .join('-')	            Array ko "-" ke saath jod diya	"Thu-Feb-22-2024" -->
+                     <!-- Better Way? (.toDateString())------%= chat.created_at.toDateString() %>------Thu Feb 22 2024 -->
+
             </div>
             <% } %>
     </form>
